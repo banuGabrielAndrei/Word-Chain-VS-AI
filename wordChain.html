@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Chain Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Word Chain Game</h1>
+        <div id="livesContainer">
+            <div id="playerLives">Your Lives: 5</div>
+            <div id="aiLives">AI Lives: 5</div>
+        </div>
+        <p>Type a word to continue the chain and beat the AI!</p>
+        <input type="text" id="playerWord" placeholder="Enter your word" />
+        <button id="submitWord">Submit</button>
+        <button id="giveUpButton">Give Up</button>
+        <button id="restartButton" style="display: none;">Restart</button>
+        <div id="responseContainer"></div>
+        <div id="messageContainer"></div>
+    </div>
+
+    <script src="wordChain.js"></script>
+</body>
+</html>
