@@ -45,7 +45,7 @@ app.post("/api/wordchain", async (req, res) => {
 });
 
 app.get("/", (_req, res) => {
-    res.sendFile(path.join(process.cwd(), 'wordChain.html'));
+    res.sendFile(path.join(process.cwd(), "wordChain.html"));
 });
 
 app.listen(PORT, () => {

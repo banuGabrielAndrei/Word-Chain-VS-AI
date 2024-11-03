@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const submitButton = document.getElementById('submitWord');
-    const giveUpButton = document.getElementById('giveUpButton');
-    const restartButton = document.getElementById('restartButton');
-    const playerWordInput = document.getElementById('playerWord');
-    const messageContainer = document.getElementById('messageContainer');
-    const responseContainer = document.getElementById('responseContainer');
-    const playerLivesDisplay = document.getElementById('playerLives');
-    const aiLivesDisplay = document.getElementById('aiLives');
+    const submitButton = document.getElementById("submitWord");
+    const giveUpButton = document.getElementById("giveUpButton");
+    const restartButton = document.getElementById("restartButton");
+    const playerWordInput = document.getElementById("playerWord");
+    const messageContainer = document.getElementById("messageContainer");
+    const responseContainer = document.getElementById("responseContainer");
+    const playerLivesDisplay = document.getElementById("playerLives");
+    const aiLivesDisplay = document.getElementById("aiLives");
 
     let playerLives = 5;
     let aiLives =5;
@@ -15,14 +15,14 @@ document.addEventListener('DOMContentLoaded', () => {
         playerLivesDisplay.textContent = `Your Lives: ${playerLives}`;
         aiLivesDisplay.textContent = `AI Lives: ${aiLives}`;
         if (playerLives <= 2) {
-            playerLivesDisplay.classList.add('red');
+            playerLivesDisplay.classList.add("red");
         } else {
-            playerLivesDisplay.classList.remove('red');
+            playerLivesDisplay.classList.remove("red");
         }
         if (aiLives <= 2) {
-            aiLivesDisplay.classList.add('red');
+            aiLivesDisplay.classList.add("red");
         } else {
-            aiLivesDisplay.classList.remove('red');
+            aiLivesDisplay.classList.remove("red");
         }
     };
 
@@ -40,41 +40,41 @@ document.addEventListener('DOMContentLoaded', () => {
         submitButton.disabled = true;
         giveUpButton.disabled = true;
         playerWordInput.disabled = true;
-        restartButton.style.display = 'block';
+        restartButton.style.display = "block";
     };
 
     const restartGame = () => {
         playerLives = 5;
         aiLives = 5;
-        playerWordInput.value = ''; 
-        messageContainer.textContent = '';
-        responseContainer.textContent = '';
+        playerWordInput.value = ""; 
+        messageContainer.textContent = "";
+        responseContainer.textContent = "";
         submitButton.disabled = false;
         giveUpButton.disabled = false;
         playerWordInput.disabled = false;
-        restartButton.style.display = 'none';
+        restartButton.style.display = "none";
         livesDisplay();
     };
 
     livesDisplay();
 
-     submitButton.addEventListener('click', async () => {
+     submitButton.addEventListener("click", async () => {
         const playerWord = playerWordInput.value.trim();
-        messageContainer.textContent = '';
-        responseContainer.textContent = 'Thinking...';
+        messageContainer.textContent = "";
+        responseContainer.textContent = "Thinking...";
         if (playerWord.length < 3) {
             messageContainer.textContent = "Please enter a word with more than 2 letters.";
             return;
         }
         try {
-            const response = await fetch('/api/wordchain', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+            const response = await fetch("/api/wordchain", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ word: playerWord })
             });
 
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+                throw new Error("Network response was not ok");
             }
             const data = await response.json();
             const aiWord = data.aiWord;
@@ -93,12 +93,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    giveUpButton.addEventListener('click', () => {
+    giveUpButton.addEventListener("click", () => {
         --playerLives;
         messageContainer.textContent = `You gave up! You have ${playerLives} lives left.`;
         livesDisplay();
         checkGame();
     });
 
-    restartButton.addEventListener('click', restartGame);
+    restartButton.addEventListener("click", restartGame);
 });
